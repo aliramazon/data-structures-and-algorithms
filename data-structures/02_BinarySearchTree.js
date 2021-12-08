@@ -97,6 +97,32 @@ class BinarySearchTree {
             }
         }
     }
+
+    // Debth-First-Traverse
+
+    inorderDFT(node) {
+        if (!node) return;
+
+        this.inorderDFT(node.leftChild);
+        console.log(node.value);
+        this.inorderDFT(node.rightChild);
+    }
+
+    preorderDFT(node) {
+        if (!node) return;
+
+        console.log(node.value);
+        this.preorderDFT(node.leftChild);
+        this.preorderDFT(node.rightChild);
+    }
+
+    postOrderDFT(node) {
+        if (!node) return;
+
+        this.postOrderDFT(node.leftChild);
+        this.postOrderDFT(node.rightChild);
+        console.log(node.value);
+    }
 }
 
 /*

@@ -36,19 +36,6 @@ class BinarySearchTree {
         }
     }
 
-    /* #lift(nodeToDelete, nodeToDeleteRightChild) {
-        if (nodeToDeleteRightChild.leftChild) {
-            nodeToDeleteRightChild.leftChild = this.#lift(
-                nodeToDelete,
-                nodeToDeleteRightChild.leftChild
-            );
-            return nodeToDeleteRightChild;
-        } else {
-            nodeToDelete.value = nodeToDeleteRightChild.value;
-            return nodeToDeleteRightChild.rightChild;
-        }
-    } */
-
     search(value, node = this.root) {
         if (!node || node.value === value) {
             return node;
@@ -91,9 +78,6 @@ class BinarySearchTree {
                     this.delete(min.value, parentMinNode);
                 }
                 return node;
-
-                /* node.rightChild = this.#lift(node, node.rightChild);
-                return node; */
             }
         }
     }
@@ -141,6 +125,30 @@ class BinarySearchTree {
             if (popped.rightChild) {
                 current = popped.rightChild;
                 stack.push(current);
+            }
+        }
+
+        return output;
+    }
+
+    preorderDFTiterative(root) {
+        let stack = [];
+        let output = [];
+
+        let current = root;
+        if (!root) return output;
+
+        stack.push(root);
+
+        while (stack.length > 0) {
+            let popped = stack.pop();
+            output.push(popped.value);
+
+            if (popped.rightChild) {
+                stack.push(popped.rightChild);
+            }
+            if (popped.leftChild) {
+                stack.push(popped.leftChild);
             }
         }
 

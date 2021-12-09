@@ -123,6 +123,29 @@ class BinarySearchTree {
         this.postOrderDFT(node.rightChild);
         console.log(node.value);
     }
+
+    inorderDFTiterative(root) {
+        let stack = [];
+        let output = [];
+        let current = root;
+        if (!root) return output;
+        stack.push(current);
+
+        while (stack.length > 0) {
+            while (current.leftChild) {
+                current = current.leftChild;
+                stack.push(current);
+            }
+            let popped = stack.pop();
+            output.push(popped.value);
+            if (popped.rightChild) {
+                current = popped.rightChild;
+                stack.push(current);
+            }
+        }
+
+        return output;
+    }
 }
 
 /*

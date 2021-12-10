@@ -135,9 +135,7 @@ class BinarySearchTree {
         let stack = [];
         let output = [];
 
-        let current = root;
         if (!root) return output;
-
         stack.push(root);
 
         while (stack.length > 0) {
@@ -149,6 +147,32 @@ class BinarySearchTree {
             }
             if (popped.leftChild) {
                 stack.push(popped.leftChild);
+            }
+        }
+
+        return output;
+    }
+
+    postorderDFTiterative(root) {
+        let stack = [];
+        let output = [];
+        let visited = new Map();
+
+        if (!root) return output;
+
+        while (stack.length > 0) {
+            let top = stack[stack.length - 1];
+            if (!visited.has(top)) {
+                visited.set(top, top.value);
+                if (top.rightChild) {
+                    stack.push(top.rightChild);
+                }
+                if (top.leftChild) {
+                    stack.push(top.leftChild);
+                }
+            } else {
+                let popped = stack.pop();
+                output.push(popped.value);
             }
         }
 

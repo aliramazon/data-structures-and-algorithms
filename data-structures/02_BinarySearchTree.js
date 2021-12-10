@@ -173,6 +173,7 @@ class BinarySearchTree {
             } else {
                 let popped = stack.pop();
                 output.push(popped.value);
+                visited.delete(popped);
             }
         }
 

@@ -179,17 +179,38 @@ class BinarySearchTree {
 
         return output;
     }
+
+    breadthFirstTraversal(root) {
+        if (!root) return [];
+        let queue = [];
+        let level = [];
+        let levels = [];
+        queue.unshift(root);
+        let levelLength = queue.length;
+
+        while (queue.length) {
+            if (levelLength === 0) {
+                levelLength = queue.length;
+                levels.push(level);
+                level = [];
+            }
+            let dequeued = queue.pop();
+            level.push(dequeued.val);
+            levelLength--;
+
+            if (dequeued.leftChild) {
+                queue.unshift(dequeued.leftChild);
+            }
+
+            if (dequeued.rightChild) {
+                queue.unshift(dequeued.rightChild);
+            }
+        }
+
+        levels.push(level);
+        return levels;
+    }
 }
-
-/*
-                            15
-                      7              20
-                    4   8       18       25
-                 2         10         22 
-                    3        11     21
-                                      21.5
-
-*/
 
 // let bst = new BinarySearchTree();
 // let seq = [15, 10, 9, 12, 11, 14, 8, 9.5, 19, 18, 21, 17, 18.5, 20, 22];

@@ -29,4 +29,19 @@ class MinStack {
     getMin() {
         return this.#minHolder[this.#minHolder.length - 1];
     }
+
+    popMin() {
+        let temp = [];
+        let poppedMin = this.#minHolder.pop();
+
+        while (this.top() !== poppedMin) {
+            temp.push(this.pop());
+        }
+        this.#stack.pop();
+
+        while (temp.length) {
+            this.push(temp.pop());
+        }
+        return poppedMin;
+    }
 }

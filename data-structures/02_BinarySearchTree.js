@@ -109,11 +109,10 @@ class BinarySearchTree {
     }
 
     inorderDFTiterative(root) {
-        let stack = [];
-        let output = [];
+        if (!root) return [];
         let current = root;
-        if (!root) return output;
-        stack.push(current);
+        let stack = [current];
+        let output = [];
 
         while (stack.length > 0) {
             while (current.leftChild) {
@@ -132,11 +131,9 @@ class BinarySearchTree {
     }
 
     preorderDFTiterative(root) {
-        let stack = [];
+        if (!root) return [];
+        let stack = [root];
         let output = [];
-
-        if (!root) return output;
-        stack.push(root);
 
         while (stack.length > 0) {
             let popped = stack.pop();
@@ -154,11 +151,10 @@ class BinarySearchTree {
     }
 
     postorderDFTiterative(root) {
-        let stack = [];
+        if (!root) return [];
+        let stack = [root];
         let output = [];
         let visited = new Map();
-
-        if (!root) return output;
 
         while (stack.length > 0) {
             let top = stack[stack.length - 1];
@@ -182,10 +178,9 @@ class BinarySearchTree {
 
     breadthFirstTraversal(root) {
         if (!root) return [];
-        let queue = [];
+        let queue = [root];
         let level = [];
         let levels = [];
-        queue.unshift(root);
         let levelLength = queue.length;
 
         while (queue.length) {

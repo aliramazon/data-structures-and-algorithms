@@ -71,7 +71,7 @@ class BinaryMaxHeap {
     }
 
     delete() {
-        let largestValue = this.#data[0];
+        let largestValue = this.root;
         let lastNode = this.#data.pop();
         if (!this.length) return lastNode;
         this.#data[0] = lastNode;

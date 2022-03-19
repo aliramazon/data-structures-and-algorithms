@@ -11,10 +11,6 @@ class BinaryMaxHeap {
         return this.#data[0];
     }
 
-    get #lastNode() {
-        return this.#data[this.length - 1];
-    }
-
     #leftChildIdx(parentIdx) {
         return parentIdx * 2 + 1;
     }
@@ -52,6 +48,7 @@ class BinaryMaxHeap {
     }
 
     insert(value) {
+        if (value === undefined) return;
         this.#data.push(value);
         let newNodeIdx = this.length - 1;
 

@@ -13,6 +13,7 @@ class SinglyLinkedList {
         this.#length = 0;
     }
 
+    /* Get length: O(1) */
     get length() {
         return this.#length;
     }
@@ -21,11 +22,13 @@ class SinglyLinkedList {
         return new Node(value);
     }
 
+    /* O(1) */
     push(value) {
-        let newNode = this.#newNode(value);
+        const newNode = this.#newNode(value);
 
         if (this.#length === 0) {
-            this.head = this.tail = newNode;
+            this.tail = newNode;
+            this.head = this.tail;
         } else {
             this.tail.next = newNode;
             this.tail = this.tail.next;
@@ -33,11 +36,13 @@ class SinglyLinkedList {
         return ++this.#length;
     }
 
+    /* O(1) */
     unshift(value) {
         let newNode = this.#newNode(value);
 
         if (this.#length === 0) {
-            this.head = this.tail = newNode;
+            this.tail = newNode;
+            this.head = this.tail;
         } else {
             newNode.next = this.head;
             this.head = newNode;
@@ -45,12 +50,14 @@ class SinglyLinkedList {
         return ++this.#length;
     }
 
+    /* O(N) */
     pop() {
-        let popped = this.tail;
+        const popped = this.tail;
         if (!popped) return undefined;
 
         if (this.#length === 1) {
-            this.head = this.tail = null;
+            this.tail = null;
+            this.head = this.tail;
         } else {
             let current = this.head;
             while (current.next.next) {
@@ -64,8 +71,9 @@ class SinglyLinkedList {
         return popped;
     }
 
+    /* O(1) */
     shift() {
-        let shifted = this.head;
+        const shifted = this.head;
         if (!shifted) return undefined;
 
         if (this.#length === 1) {
@@ -78,6 +86,8 @@ class SinglyLinkedList {
         return shifted;
     }
 
+    /* O(N) */
+
     remove(value) {
         let current = this.head;
         if (!current) return false;
@@ -89,8 +99,11 @@ class SinglyLinkedList {
             while (current.next && current.next.value !== value) {
                 current = current.next;
             }
-            if (!current.next) return false;
+            if (!current.next) return false; // if we could not find the value, return false
+            // If we find the value, direct current node to next next node.
             current.next = current.next.next;
+
+            // If removed node was the last node, then set tail to current node.
             if (!current.next) {
                 this.tail = current;
             }
@@ -98,6 +111,17 @@ class SinglyLinkedList {
         }
         return true;
     }
+
+    /* O(values.length) */
+    build(values) {
+        for (const value of values) {
+            this.push(value);
+        }
+
+        return this;
+    }
+
+    /* O(N) */
 
     reverse() {
         let current = this.head;
@@ -114,3 +138,5 @@ class SinglyLinkedList {
         return this;
     }
 }
+
+export { SinglyLinkedList };

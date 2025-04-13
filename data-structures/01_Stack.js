@@ -4,13 +4,18 @@ class Stack {
         this.#stack = [];
     }
 
+    /* Get the size of stack */
+    get size() {
+        return this.#stack.length;
+    }
+
     /* Checks whether the stack is empty? */
     isEmpty() {
         return this.#stack.length === 0;
     }
 
     /* Get the top item from the stack */
-    top() {
+    peek() {
         return this.#stack[this.#stack.length - 1];
     }
 
